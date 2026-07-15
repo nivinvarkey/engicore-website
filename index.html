@@ -1,35 +1,263 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EngiCore Premium</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EngiCore — Engineering Operations Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-</head><body>
-<nav><div class="logo">ENGICORE</div><div><a href="#features">Features</a><a href="#stats">Stats</a><a href="#roadmap">Roadmap</a></div></nav>
-<section class="hero">
-<h1>Engineering Operations Platform</h1>
-<h2><span id="typed"></span></h2>
-<p>Transforming Engineering Operations for EPC & Fabrication Teams.</p>
-<button>Request Demo</button>
-</section>
-<section id="features"><h2>Features</h2>
-<div class="grid">
-<div data-aos="fade-up">Document Management</div>
-<div data-aos="fade-up">Workfront</div>
-<div data-aos="fade-up">Support DPR</div>
-<div data-aos="fade-up">JDE Integration</div>
-<div data-aos="fade-up">SharePoint Sync</div>
-<div data-aos="fade-up">AI Ready</div>
-</div></section>
-<section id="stats"><h2>Platform Metrics</h2>
-<div class="grid">
-<div><b>80,000+</b><br>Indexed Files</div>
-<div><b>40+</b><br>Users</div>
-<div><b>8+</b><br>Modules</div>
-<div><b>99.9%</b><br>Availability</div>
-</div></section>
-<section id="roadmap"><h2>Roadmap</h2>
-<ul><li>2026 - Desktop Suite</li><li>2027 - Cloud Platform</li><li>2028 - AI Assistant</li></ul>
-</section>
-<footer>© 2026 EngiCore</footer>
-<script src="script.js"></script></body></html>
+</head>
+<body>
+
+<!-- ===== Blueprint grid backdrop ===== -->
+<div class="grid-backdrop" aria-hidden="true"></div>
+
+<!-- ===== Sheet index / nav ===== -->
+<nav class="sheet-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">EC</span>
+      <span class="brand-name">ENGICORE</span>
+    </a>
+    <div class="sheet-tabs" id="sheetTabs">
+      <a href="#overview" class="sheet-tab is-active" data-tab="overview"><span class="tab-no">01</span>Overview</a>
+      <a href="#modules" class="sheet-tab" data-tab="modules"><span class="tab-no">02</span>Modules</a>
+      <a href="#architecture" class="sheet-tab" data-tab="architecture"><span class="tab-no">03</span>Architecture</a>
+      <a href="#access" class="sheet-tab" data-tab="access"><span class="tab-no">04</span>Access</a>
+      <a href="#roadmap" class="sheet-tab" data-tab="roadmap"><span class="tab-no">05</span>Roadmap</a>
+    </div>
+    <button class="nav-cta">Request demo</button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ===== HERO — title block ===== -->
+  <section id="overview" class="hero">
+    <div class="title-block">
+      <div class="tb-row tb-top">
+        <span>DRAWING TITLE</span>
+        <span>ENGINEERING OPERATIONS PLATFORM</span>
+      </div>
+      <h1 class="hero-h1">
+        One console.<br>
+        <span class="type-target" id="heroType"></span><span class="caret">_</span>
+      </h1>
+      <p class="hero-lede">
+        EngiCore replaces the scattered spreadsheets, shared drives, and one-off scripts that
+        EPC &amp; fabrication teams accumulate — with a single desktop platform, one module per tab.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary">Request demo</button>
+        <button class="btn btn-ghost">View modules ↓</button>
+      </div>
+      <div class="tb-row tb-bottom">
+        <span>DRAWN&nbsp;BY&nbsp;<b>ENGICORE&nbsp;TEAM</b></span>
+        <span>REV&nbsp;<b>2.4</b></span>
+        <span>SCALE&nbsp;<b>N.T.S.</b></span>
+        <span>SHEET&nbsp;<b>01/06</b></span>
+      </div>
+    </div>
+
+    <div class="hero-stats" id="stats">
+      <div class="stat" data-reveal>
+        <span class="stat-num" data-count="80000" data-suffix="+">0</span>
+        <span class="stat-label">Files indexed</span>
+      </div>
+      <div class="stat" data-reveal>
+        <span class="stat-num" data-count="40" data-suffix="+">0</span>
+        <span class="stat-label">Active users</span>
+      </div>
+      <div class="stat" data-reveal>
+        <span class="stat-num" data-count="8" data-suffix="+">0</span>
+        <span class="stat-label">Modules shipped</span>
+      </div>
+      <div class="stat" data-reveal>
+        <span class="stat-num" data-count="99.9" data-suffix="%" data-decimal="1">0</span>
+        <span class="stat-label">Uptime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MODULES — the console (signature element) ===== -->
+  <section id="modules" class="modules">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">02 — Modules</span>
+      <h2>Every workflow opens in its own tab.</h2>
+      <p>The same tab-per-module pattern EngiCore runs on internally — try it below.</p>
+    </div>
+
+    <div class="console" data-reveal>
+      <div class="console-chrome">
+        <div class="chrome-dots"><span></span><span></span><span></span></div>
+        <div class="chrome-title">EngiCore.exe — Piping Operations Desktop</div>
+        <div class="chrome-status"><span class="status-dot"></span>connected</div>
+      </div>
+
+      <div class="console-body">
+        <div class="console-tabs" id="consoleTabs" role="tablist">
+          <button class="ctab is-active" data-mod="docs" role="tab" aria-selected="true">
+            <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15 2v5h5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            Document Mgmt
+          </button>
+          <button class="ctab" data-mod="dwg" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 9v12" stroke="currentColor" stroke-width="1.5"/></svg>
+            DWG Batch Editor
+          </button>
+          <button class="ctab" data-mod="pdf" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5"/></svg>
+            PDF Merger
+          </button>
+          <button class="ctab" data-mod="dpr" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.5"/></svg>
+            Support DPR
+          </button>
+          <button class="ctab" data-mod="jde" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.5"/></svg>
+            JDE Integration
+          </button>
+          <button class="ctab" data-mod="sync" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M18 4v4h-4M6 20v-4h4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            SharePoint Sync
+          </button>
+          <button class="ctab" data-mod="log" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24"><path d="M12 3v9l6 3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            Activity Log
+          </button>
+        </div>
+
+        <div class="console-panel" id="consolePanel">
+          <!-- filled by script.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ARCHITECTURE ===== -->
+  <section id="architecture" class="architecture">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">03 — Architecture</span>
+      <h2>Built like the drawings it manages.</h2>
+      <p>Every module follows the same discipline, so the platform scales the way a drawing register does — predictably, one sheet at a time.</p>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch-card" data-reveal>
+        <span class="arch-index">§1</span>
+        <h3>Module-per-feature</h3>
+        <p>Each workflow is its own file, with a background worker handling the heavy lifting separate from the tab's display logic. A change to one module can't leak into another.</p>
+      </div>
+      <div class="arch-card" data-reveal>
+        <span class="arch-index">§2</span>
+        <h3>Shared utilities</h3>
+        <p>Buttons, activity logging, and the current user are pulled from one shared layer, so every tab looks, behaves, and reports the same way by default.</p>
+      </div>
+      <div class="arch-card" data-reveal>
+        <span class="arch-index">§3</span>
+        <h3>Logged by default</h3>
+        <p>Every completed action writes to a central activity log. Nothing runs silently — if a batch job touched a file, there's a record of it.</p>
+      </div>
+      <div class="arch-card" data-reveal>
+        <span class="arch-index">§4</span>
+        <h3>Self-updating</h3>
+        <p>New builds ship through the release channel and the desktop app pulls them down on its own. No manual reinstall across 40+ workstations.</p>
+      </div>
+    </div>
+
+    <div class="stack-strip" data-reveal>
+      <span class="stack-label">RUNTIME</span>
+      <div class="stack-chips">
+        <span class="chip">Python</span>
+        <span class="chip">PySide6</span>
+        <span class="chip">Supabase</span>
+        <span class="chip">GitHub Releases</span>
+        <span class="chip">AutoCAD LT 2024</span>
+        <span class="chip">JD Edwards</span>
+        <span class="chip">SharePoint</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACCESS CONTROL ===== -->
+  <section id="access" class="access">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">04 — Access</span>
+      <h2>Twelve roles. One sign-in.</h2>
+      <p>Designation-based access means what you see on login is what your role actually needs — nothing more.</p>
+    </div>
+
+    <div class="access-grid" data-reveal>
+      <div class="role-chip">Project Engineer</div>
+      <div class="role-chip">Piping Detailer</div>
+      <div class="role-chip">Shop Coordinator</div>
+      <div class="role-chip">Site Coordinator</div>
+      <div class="role-chip">QA / QC Inspector</div>
+      <div class="role-chip">Document Controller</div>
+      <div class="role-chip">Planning Engineer</div>
+      <div class="role-chip">Fabrication Supervisor</div>
+      <div class="role-chip">Materials Coordinator</div>
+      <div class="role-chip">Project Manager</div>
+      <div class="role-chip">IT Administrator</div>
+      <div class="role-chip">Viewer</div>
+    </div>
+    <p class="access-foot">Daily login authentication keeps every session tied to a named, logged user.</p>
+  </section>
+
+  <!-- ===== ROADMAP ===== -->
+  <section id="roadmap" class="roadmap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">05 — Roadmap</span>
+      <h2>Three sheets out.</h2>
+    </div>
+
+    <div class="timeline" data-reveal>
+      <div class="tl-track"></div>
+
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-dot is-current"></div>
+        <div class="tl-card">
+          <h3>Desktop Suite</h3>
+          <p>Consolidate the module set — document management, DWG batch editing, PDF merging, and DPR reporting — into one hardened release.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2027</div>
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <h3>Cloud Platform</h3>
+          <p>Move shared state off individual machines so activity, access, and file indexes stay in sync across sites without a VPN.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2028</div>
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <h3>AI Assistant</h3>
+          <p>Surface answers from the indexed drawing set directly — "which spools are pending QC on this line" — instead of a manual search.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" data-reveal>
+    <h2>Bring your drawing register into one console.</h2>
+    <button class="btn btn-primary">Request demo</button>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 EngiCore — Epic Piping International</span>
+    <span class="footer-mono">BUILD 2.4.0 · DESKTOP</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
