@@ -1,263 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EngiCore — Engineering Operations Platform</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EngiCore — Engineering Operations, Simplified. An internal engineering productivity tool for document control, piping, reporting, spool tracking and file automation." />
+  <title>EngiCore — Engineering Operations, Simplified</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0a1729;
+      --panel:#0e1d31;
+      --panel2:#12243b;
+      --text:#eef6ff;
+      --muted:#9db0c5;
+      --line:rgba(255,255,255,.09);
+      --cyan:#43d7e8;
+      --teal:#33c7a8;
+      --blue:#5b8cff;
+      --shadow:0 22px 60px rgba(0,0,0,.28);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(67,215,232,.12), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(91,140,255,.12), transparent 28%),
+        linear-gradient(180deg,var(--bg),#081421 52%,#07111f 100%);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1180px,calc(100% - 40px));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(18px);
+      background:rgba(7,17,31,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px}
+    .brandmark{
+      width:38px;height:38px;border-radius:12px;
+      background:linear-gradient(135deg,var(--cyan),var(--blue));
+      box-shadow:0 0 30px rgba(67,215,232,.28);
+      position:relative;
+    }
+    .brandmark:before,.brandmark:after{content:"";position:absolute;border:2px solid rgba(4,16,28,.8);border-radius:999px}
+    .brandmark:before{inset:9px 7px}
+    .brandmark:after{inset:7px 14px}
+    .navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}
+    .navlinks a:hover{color:var(--text)}
+    .pill{padding:10px 14px;border:1px solid var(--line);border-radius:999px;color:#cde7f3;font-size:13px;background:rgba(255,255,255,.03)}
+
+    .hero{padding:110px 0 90px;position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:rgba(67,215,232,.08);border:1px solid rgba(67,215,232,.22);color:#a9f0f6;font-size:13px;font-weight:700}
+    h1{font-size:clamp(48px,7vw,88px);line-height:.98;margin:20px 0 18px;letter-spacing:-3px}
+    .gradient{background:linear-gradient(90deg,#fff 0%,#b8f3f6 42%,#8faeff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{font-size:19px;color:var(--muted);max-width:720px;margin:0 0 30px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:750;font-size:14px;border:1px solid var(--line)}
+    .btn-primary{background:linear-gradient(135deg,var(--cyan),#66a8ff);color:#061421;border:none;box-shadow:0 14px 38px rgba(67,215,232,.22)}
+    .btn-secondary{background:rgba(255,255,255,.03);color:var(--text)}
+
+    .hero-card{position:relative;min-height:430px;border-radius:28px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(19,40,65,.88),rgba(11,26,44,.88));box-shadow:var(--shadow);overflow:hidden}
+    .hero-card:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent)}
+    .pipeline{position:absolute;inset:50px 34px 40px 34px}
+    .pipe{position:absolute;height:4px;background:linear-gradient(90deg,rgba(67,215,232,.25),var(--cyan),rgba(91,140,255,.5));border-radius:999px;box-shadow:0 0 18px rgba(67,215,232,.35)}
+    .pipe.one{left:4%;top:22%;width:70%;transform:rotate(-7deg)}
+    .pipe.two{right:0;top:48%;width:68%;transform:rotate(11deg)}
+    .pipe.three{left:8%;bottom:18%;width:80%;transform:rotate(-2deg)}
+    .node{position:absolute;width:18px;height:18px;border-radius:50%;background:#07111f;border:3px solid var(--cyan);box-shadow:0 0 24px rgba(67,215,232,.55)}
+    .n1{left:18%;top:19%}.n2{left:58%;top:34%}.n3{right:14%;top:50%}.n4{left:27%;bottom:15%}.n5{right:7%;bottom:12%}
+    .mini-card{position:absolute;padding:13px 15px;border-radius:14px;background:rgba(7,17,31,.78);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);box-shadow:0 12px 34px rgba(0,0,0,.2)}
+    .m1{left:26px;top:28px}.m2{right:26px;top:110px}.m3{left:50px;bottom:28px}
+    .mini-card b{display:block;font-size:13px}.mini-card span{font-size:11px;color:var(--muted)}
+
+    section{padding:88px 0}
+    .section-head{display:flex;justify-content:space-between;gap:32px;align-items:end;margin-bottom:34px}
+    .section-head h2{font-size:clamp(32px,4vw,48px);line-height:1.08;margin:8px 0 0;letter-spacing:-1.4px}
+    .section-head p{max-width:620px;color:var(--muted);margin:0}
+    .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.8px;color:var(--cyan);font-weight:800}
+
+    .overview-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .stat,.card{background:linear-gradient(180deg,rgba(18,36,59,.92),rgba(12,27,45,.92));border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 35px rgba(0,0,0,.14)}
+    .stat{padding:24px}.stat strong{display:block;font-size:34px;margin-bottom:5px}.stat span{color:var(--muted);font-size:13px}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{padding:24px}
+    .icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(67,215,232,.16),rgba(91,140,255,.18));border:1px solid rgba(67,215,232,.2);font-size:21px;margin-bottom:16px}
+    .feature h3,.module h3{margin:0 0 8px;font-size:18px}.feature p,.module p{margin:0;color:var(--muted);font-size:14px}
+
+    .modules{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .module{padding:24px;position:relative;overflow:hidden}
+    .module:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(67,215,232,.13),transparent 70%);right:-20px;top:-20px}
+    .tag{display:inline-block;margin-bottom:14px;padding:5px 9px;border-radius:999px;border:1px solid var(--line);color:#b8c8da;font-size:11px}
+
+    .deep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .deep{padding:28px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between}
+    .deep .num{font-size:12px;color:var(--cyan);font-weight:800;letter-spacing:1px}.deep h3{font-size:23px;margin:10px 0}.deep p{color:var(--muted);font-size:14px;margin:0}
+
+    .benefits{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch}
+    .benefit-panel{padding:30px}
+    .benefit-list{display:grid;gap:12px;margin-top:18px}
+    .benefit-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+    .check{width:22px;height:22px;border-radius:7px;background:rgba(51,199,168,.14);border:1px solid rgba(51,199,168,.3);display:grid;place-items:center;color:#86f0d1;flex:0 0 auto;font-size:12px}
+    .benefit-item b{display:block;font-size:14px}.benefit-item span{color:var(--muted);font-size:13px}
+
+    .version{padding:36px;display:flex;justify-content:space-between;gap:30px;align-items:center;background:linear-gradient(135deg,rgba(67,215,232,.1),rgba(91,140,255,.08));border:1px solid rgba(67,215,232,.18);border-radius:26px}
+    .version h3{font-size:32px;margin:0 0 8px}.version p{margin:0;color:var(--muted);max-width:700px}.version-badge{font-size:40px;font-weight:900;letter-spacing:-2px;color:#bdf7fa;white-space:nowrap}
+
+    footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}
+
+    @media (max-width:900px){
+      .navlinks{display:none}.hero{padding-top:78px}.hero-grid{grid-template-columns:1fr}.hero-card{min-height:350px}.overview-grid{grid-template-columns:repeat(2,1fr)}.features,.deep-grid{grid-template-columns:1fr}.modules{grid-template-columns:1fr}.benefits{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:16px}.version{display:block}.version-badge{margin-top:18px}
+    }
+    @media (max-width:560px){
+      .container{width:min(100% - 24px,1180px)}h1{letter-spacing:-2px}.overview-grid{grid-template-columns:1fr}.hero-card{min-height:300px}.version{padding:24px}.version-badge{font-size:32px}.footer-row{display:block}.footer-row>div+div{margin-top:8px}
+    }
+  </style>
 </head>
 <body>
-
-<!-- ===== Blueprint grid backdrop ===== -->
-<div class="grid-backdrop" aria-hidden="true"></div>
-
-<!-- ===== Sheet index / nav ===== -->
-<nav class="sheet-nav">
-  <div class="nav-inner">
-    <a href="#top" class="brand">
-      <span class="brand-mark">EC</span>
-      <span class="brand-name">ENGICORE</span>
-    </a>
-    <div class="sheet-tabs" id="sheetTabs">
-      <a href="#overview" class="sheet-tab is-active" data-tab="overview"><span class="tab-no">01</span>Overview</a>
-      <a href="#modules" class="sheet-tab" data-tab="modules"><span class="tab-no">02</span>Modules</a>
-      <a href="#architecture" class="sheet-tab" data-tab="architecture"><span class="tab-no">03</span>Architecture</a>
-      <a href="#access" class="sheet-tab" data-tab="access"><span class="tab-no">04</span>Access</a>
-      <a href="#roadmap" class="sheet-tab" data-tab="roadmap"><span class="tab-no">05</span>Roadmap</a>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#top" class="brand"><span class="brandmark"></span><span>EngiCore</span></a>
+      <nav class="navlinks">
+        <a href="#overview">Overview</a>
+        <a href="#features">Features</a>
+        <a href="#modules">Modules</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#version">Version</a>
+      </nav>
+      <span class="pill">Internal Engineering Productivity Tool</span>
     </div>
-    <button class="nav-cta">Request demo</button>
-  </div>
-</nav>
+  </header>
 
-<main id="top">
-
-  <!-- ===== HERO — title block ===== -->
-  <section id="overview" class="hero">
-    <div class="title-block">
-      <div class="tb-row tb-top">
-        <span>DRAWING TITLE</span>
-        <span>ENGINEERING OPERATIONS PLATFORM</span>
-      </div>
-      <h1 class="hero-h1">
-        One console.<br>
-        <span class="type-target" id="heroType"></span><span class="caret">_</span>
-      </h1>
-      <p class="hero-lede">
-        EngiCore replaces the scattered spreadsheets, shared drives, and one-off scripts that
-        EPC &amp; fabrication teams accumulate — with a single desktop platform, one module per tab.
-      </p>
-      <div class="hero-actions">
-        <button class="btn btn-primary">Request demo</button>
-        <button class="btn btn-ghost">View modules ↓</button>
-      </div>
-      <div class="tb-row tb-bottom">
-        <span>DRAWN&nbsp;BY&nbsp;<b>ENGICORE&nbsp;TEAM</b></span>
-        <span>REV&nbsp;<b>2.4</b></span>
-        <span>SCALE&nbsp;<b>N.T.S.</b></span>
-        <span>SHEET&nbsp;<b>01/06</b></span>
-      </div>
-    </div>
-
-    <div class="hero-stats" id="stats">
-      <div class="stat" data-reveal>
-        <span class="stat-num" data-count="80000" data-suffix="+">0</span>
-        <span class="stat-label">Files indexed</span>
-      </div>
-      <div class="stat" data-reveal>
-        <span class="stat-num" data-count="40" data-suffix="+">0</span>
-        <span class="stat-label">Active users</span>
-      </div>
-      <div class="stat" data-reveal>
-        <span class="stat-num" data-count="8" data-suffix="+">0</span>
-        <span class="stat-label">Modules shipped</span>
-      </div>
-      <div class="stat" data-reveal>
-        <span class="stat-num" data-count="99.9" data-suffix="%" data-decimal="1">0</span>
-        <span class="stat-label">Uptime</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== MODULES — the console (signature element) ===== -->
-  <section id="modules" class="modules">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">02 — Modules</span>
-      <h2>Every workflow opens in its own tab.</h2>
-      <p>The same tab-per-module pattern EngiCore runs on internally — try it below.</p>
-    </div>
-
-    <div class="console" data-reveal>
-      <div class="console-chrome">
-        <div class="chrome-dots"><span></span><span></span><span></span></div>
-        <div class="chrome-title">EngiCore.exe — Piping Operations Desktop</div>
-        <div class="chrome-status"><span class="status-dot"></span>connected</div>
-      </div>
-
-      <div class="console-body">
-        <div class="console-tabs" id="consoleTabs" role="tablist">
-          <button class="ctab is-active" data-mod="docs" role="tab" aria-selected="true">
-            <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15 2v5h5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-            Document Mgmt
-          </button>
-          <button class="ctab" data-mod="dwg" role="tab" aria-selected="false">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 9v12" stroke="currentColor" stroke-width="1.5"/></svg>
-            DWG Batch Editor
-          </button>
-          <button class="ctab" data-mod="pdf" role="tab" aria-selected="false">
-            <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="1.5"/></svg>
-            PDF Merger
-          </button>
-          <button class="ctab" data-mod="dpr" role="tab" aria-selected="false">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.5"/></svg>
-            Support DPR
-          </button>
-          <button class="ctab" data-mod="jde" role="tab" aria-selected="false">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.5"/></svg>
-            JDE Integration
-          </button>
-          <button class="ctab" data-mod="sync" role="tab" aria-selected="false">
-            <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M18 4v4h-4M6 20v-4h4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-            SharePoint Sync
-          </button>
-          <button class="ctab" data-mod="log" role="tab" aria-selected="false">
-            <svg viewBox="0 0 24 24"><path d="M12 3v9l6 3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-            Activity Log
-          </button>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Engineering workflow automation</span>
+          <h1 class="gradient">Engineering Operations, Simplified.</h1>
+          <p>EngiCore centralizes repetitive engineering, piping and document-control workflows into one desktop utility — helping teams prepare reports, track spool activity, process PDFs and standardize file outputs faster and with fewer manual errors.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#features">Explore Features</a>
+            <a class="btn btn-secondary" href="#modules">View Modules</a>
+          </div>
         </div>
-
-        <div class="console-panel" id="consolePanel">
-          <!-- filled by script.js -->
+        <div class="hero-card" aria-label="Technical EngiCore illustration">
+          <div class="pipeline">
+            <div class="pipe one"></div><div class="pipe two"></div><div class="pipe three"></div>
+            <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div><div class="node n4"></div><div class="node n5"></div>
+          </div>
+          <div class="mini-card m1"><b>Monthly Report</b><span>Job-wise automated summaries</span></div>
+          <div class="mini-card m2"><b>Piping Isometric</b><span>Split, detect and rename</span></div>
+          <div class="mini-card m3"><b>Spec & Spool Tag</b><span>Standardized engineering outputs</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== ARCHITECTURE ===== -->
-  <section id="architecture" class="architecture">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">03 — Architecture</span>
-      <h2>Built like the drawings it manages.</h2>
-      <p>Every module follows the same discipline, so the platform scales the way a drawing register does — predictably, one sheet at a time.</p>
-    </div>
-
-    <div class="arch-grid">
-      <div class="arch-card" data-reveal>
-        <span class="arch-index">§1</span>
-        <h3>Module-per-feature</h3>
-        <p>Each workflow is its own file, with a background worker handling the heavy lifting separate from the tab's display logic. A change to one module can't leak into another.</p>
-      </div>
-      <div class="arch-card" data-reveal>
-        <span class="arch-index">§2</span>
-        <h3>Shared utilities</h3>
-        <p>Buttons, activity logging, and the current user are pulled from one shared layer, so every tab looks, behaves, and reports the same way by default.</p>
-      </div>
-      <div class="arch-card" data-reveal>
-        <span class="arch-index">§3</span>
-        <h3>Logged by default</h3>
-        <p>Every completed action writes to a central activity log. Nothing runs silently — if a batch job touched a file, there's a record of it.</p>
-      </div>
-      <div class="arch-card" data-reveal>
-        <span class="arch-index">§4</span>
-        <h3>Self-updating</h3>
-        <p>New builds ship through the release channel and the desktop app pulls them down on its own. No manual reinstall across 40+ workstations.</p>
-      </div>
-    </div>
-
-    <div class="stack-strip" data-reveal>
-      <span class="stack-label">RUNTIME</span>
-      <div class="stack-chips">
-        <span class="chip">Python</span>
-        <span class="chip">PySide6</span>
-        <span class="chip">Supabase</span>
-        <span class="chip">GitHub Releases</span>
-        <span class="chip">AutoCAD LT 2024</span>
-        <span class="chip">JD Edwards</span>
-        <span class="chip">SharePoint</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ACCESS CONTROL ===== -->
-  <section id="access" class="access">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">04 — Access</span>
-      <h2>Twelve roles. One sign-in.</h2>
-      <p>Designation-based access means what you see on login is what your role actually needs — nothing more.</p>
-    </div>
-
-    <div class="access-grid" data-reveal>
-      <div class="role-chip">Project Engineer</div>
-      <div class="role-chip">Piping Detailer</div>
-      <div class="role-chip">Shop Coordinator</div>
-      <div class="role-chip">Site Coordinator</div>
-      <div class="role-chip">QA / QC Inspector</div>
-      <div class="role-chip">Document Controller</div>
-      <div class="role-chip">Planning Engineer</div>
-      <div class="role-chip">Fabrication Supervisor</div>
-      <div class="role-chip">Materials Coordinator</div>
-      <div class="role-chip">Project Manager</div>
-      <div class="role-chip">IT Administrator</div>
-      <div class="role-chip">Viewer</div>
-    </div>
-    <p class="access-foot">Daily login authentication keeps every session tied to a named, logged user.</p>
-  </section>
-
-  <!-- ===== ROADMAP ===== -->
-  <section id="roadmap" class="roadmap">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">05 — Roadmap</span>
-      <h2>Three sheets out.</h2>
-    </div>
-
-    <div class="timeline" data-reveal>
-      <div class="tl-track"></div>
-
-      <div class="tl-item">
-        <div class="tl-year">2026</div>
-        <div class="tl-dot is-current"></div>
-        <div class="tl-card">
-          <h3>Desktop Suite</h3>
-          <p>Consolidate the module set — document management, DWG batch editing, PDF merging, and DPR reporting — into one hardened release.</p>
+    <section id="overview">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Overview</div><h2>Built around real engineering work.</h2></div>
+          <p>EngiCore was created to reduce fragmented manual processing across spreadsheets, PDFs, spool records, network folders and recurring reporting tasks. Instead of repeating the same checks and file operations by hand, teams use focused modules with predictable outputs.</p>
+        </div>
+        <div class="overview-grid">
+          <div class="stat"><strong>1</strong><span>Central utility for recurring engineering workflows</span></div>
+          <div class="stat"><strong>Job-wise</strong><span>Tracking, counting and reporting structure</span></div>
+          <div class="stat"><strong>Preview</strong><span>Validation before final file generation</span></div>
+          <div class="stat"><strong>V2.6</strong><span>Current workflow suite</span></div>
         </div>
       </div>
+    </section>
 
-      <div class="tl-item">
-        <div class="tl-year">2027</div>
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <h3>Cloud Platform</h3>
-          <p>Move shared state off individual machines so activity, access, and file indexes stay in sync across sites without a VPN.</p>
+    <section id="features">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Core strengths</div><h2>Less repetitive work. More consistency.</h2></div>
+          <p>The application focuses on engineering productivity: speed up routine processing, standardize outputs, improve visibility and keep users in control before files are generated.</p>
+        </div>
+        <div class="features">
+          <div class="card feature"><div class="icon">⚡</div><h3>Faster repetitive operations</h3><p>Automates recurring checks, counts, file preparation and report steps that would otherwise require manual effort.</p></div>
+          <div class="card feature"><div class="icon">▦</div><h3>Job-wise reporting</h3><p>Organizes operational data around job numbers so counts and monthly results can be reviewed clearly.</p></div>
+          <div class="card feature"><div class="icon">↻</div><h3>Responsive network processing</h3><p>Uses cached/background refresh patterns so slow remote-server checks do not have to block the user interface.</p></div>
+          <div class="card feature"><div class="icon">✓</div><h3>Standardized outputs</h3><p>Generates predictable file names and spreadsheet structures for downstream engineering workflows.</p></div>
+          <div class="card feature"><div class="icon">⌁</div><h3>Role & module access</h3><p>Supports module-level access rules so users see the tools relevant to their responsibilities.</p></div>
+          <div class="card feature"><div class="icon">◉</div><h3>Preview before generate</h3><p>Where practical, users can inspect calculated or detected data before creating the final output.</p></div>
         </div>
       </div>
+    </section>
 
-      <div class="tl-item">
-        <div class="tl-year">2028</div>
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <h3>AI Assistant</h3>
-          <p>Surface answers from the indexed drawing set directly — "which spools are pending QC on this line" — instead of a manual search.</p>
+    <section id="modules">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Modules</div><h2>A focused toolbox for engineering teams.</h2></div>
+          <p>Each module addresses a specific operational task while following a consistent interface and workflow style.</p>
+        </div>
+        <div class="modules">
+          <div class="card module"><span class="tag">Dashboard</span><h3>Home Dashboard</h3><p>Job-wise release visibility with day, month and custom multi-day filters, plus Today / Yesterday / Week / Month summary cards.</p></div>
+          <div class="card module"><span class="tag">Spool tracking</span><h3>DC 605 / Status 605</h3><p>Tracks T-folder based activity, including monthly and job-wise spool counts used in operational reporting.</p></div>
+          <div class="card module"><span class="tag">Reporting</span><h3>Monthly Report</h3><p>Combines dashboard differences, DPR activity and Status 605 counts to populate the Shared Service Monthly Report job-wise.</p></div>
+          <div class="card module"><span class="tag">PDF automation</span><h3>Piping Isometric</h3><p>Analyzes combined piping-isometric PDFs, groups multi-sheet drawings, then splits and renames files using detected isometric numbers.</p></div>
+          <div class="card module"><span class="tag">Engineering data</span><h3>Spec & Spool Tag</h3><p>Creates standardized Spec Data and Spool Data from JDE and SpecMaster inputs while applying active-spool and status rules.</p></div>
+          <div class="card module"><span class="tag">Engineering utilities</span><h3>Support & Material Code</h3><p>Focused utilities for support-related and material-code workflows used by engineering teams.</p></div>
+          <div class="card module"><span class="tag">File operations</span><h3>DWG Move & Barcode</h3><p>Automates repetitive drawing movement and barcode-related file preparation tasks.</p></div>
+          <div class="card module"><span class="tag">Document processing</span><h3>PDF Cleaning / File Operations</h3><p>Provides supporting document and file-processing utilities for recurring engineering deliverables.</p></div>
         </div>
       </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Workflow highlights</div><h2>Three high-impact automation areas.</h2></div>
+          <p>Recent EngiCore versions expanded beyond file utilities into more structured engineering data preparation and reporting.</p>
+        </div>
+        <div class="deep-grid">
+          <div class="card deep"><div><div class="num">01 — MONTHLY REPORT</div><h3>Prepare monthly shared-service reporting faster.</h3></div><p>Uses current and previous dashboards, monthly DPR data and T-folder Status 605 counts to calculate job-wise monthly values and fill the established report structure.</p></div>
+          <div class="card deep"><div><div class="num">02 — PIPING ISOMETRIC</div><h3>Turn one combined PDF into correctly named isometrics.</h3></div><p>Detects piping isometric numbers from title blocks, groups related sheets and produces individual PDFs with consistent drawing-based filenames.</p></div>
+          <div class="card deep"><div><div class="num">03 — SPEC & SPOOL TAG</div><h3>Build standardized spool and specification outputs.</h3></div><p>Processes JDE and SpecMaster inputs, filters inactive/cancelled records and generates the same structured Spool Data and Spec Data formats used by the team.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Benefits</div><h2>Designed to improve everyday execution.</h2></div>
+          <p>EngiCore is intended to make operational engineering work faster, more repeatable and easier to review across teams.</p>
+        </div>
+        <div class="benefits">
+          <div class="card benefit-panel">
+            <h3>Operational improvements</h3>
+            <div class="benefit-list">
+              <div class="benefit-item"><div class="check">✓</div><div><b>Reduced manual effort</b><span>Less repetitive spreadsheet, PDF and folder processing.</span></div></div>
+              <div class="benefit-item"><div class="check">✓</div><div><b>Fewer naming and entry errors</b><span>Rules are applied consistently rather than re-entered manually.</span></div></div>
+              <div class="benefit-item"><div class="check">✓</div><div><b>Faster report preparation</b><span>Recurring monthly calculations are consolidated into guided workflows.</span></div></div>
+            </div>
+          </div>
+          <div class="card benefit-panel">
+            <h3>Team consistency</h3>
+            <div class="benefit-list">
+              <div class="benefit-item"><div class="check">✓</div><div><b>Consistent UAE / Pune workflow</b><span>Shared rules and outputs reduce differences between locations.</span></div></div>
+              <div class="benefit-item"><div class="check">✓</div><div><b>Improved traceability</b><span>Job-wise processing makes it easier to understand where counts and outputs come from.</span></div></div>
+              <div class="benefit-item"><div class="check">✓</div><div><b>Controlled module access</b><span>Users can be granted only the modules needed for their work.</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="version">
+      <div class="container">
+        <div class="version">
+          <div><div class="kicker">Current edition</div><h3>EngiCore V2.6</h3><p>V2.6 extends the existing EngiCore workflow suite with the new <strong>Spec & Spool Tag</strong> module, alongside Monthly Report, Piping Isometric, DC 605 and the established engineering file utilities.</p></div>
+          <div class="version-badge">V2.6</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div class="brand"><span class="brandmark"></span><span>EngiCore</span></div>
+      <div>Internal Engineering Productivity Tool</div>
     </div>
-  </section>
-
-  <section class="cta-band" data-reveal>
-    <h2>Bring your drawing register into one console.</h2>
-    <button class="btn btn-primary">Request demo</button>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span>© 2026 EngiCore — Epic Piping International</span>
-    <span class="footer-mono">BUILD 2.4.0 · DESKTOP</span>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  </footer>
 </body>
 </html>
